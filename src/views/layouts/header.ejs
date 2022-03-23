@@ -74,71 +74,37 @@
 
       <!-- BEGIN CART -->
       <div class="top-cart-block">
+        <% let sumTotal = 0 %>
+        <% if(listCarts != null) { %>
+          <% for(let i = 0; i < listCarts.product.length; i++) { %>
+            <% sumTotal += (listCarts.product[i]._id.price - (listCarts.product[i]._id.sale/100 * listCarts.product[i]._id.price)) * listCarts.product[i].quantity %>
+          <%}%>
         <div class="top-cart-info">
-          <a href="javascript:void(0);" class="top-cart-info-count"> items</a>
-          <a href="javascript:void(0);" class="top-cart-info-value">$1260</a>
+          <a href="javascript:void(0);" class="top-cart-info-count"><%= listCarts.product.length %> items</a>
+          <a href="javascript:void(0);" class="top-cart-info-value">$<%= sumTotal %></a>
         </div>
+        <% } %>
         <i class="fa fa-shopping-cart"></i>
                       
         <div class="top-cart-content-wrapper">
           <div class="top-cart-content">
             <ul class="scroller" style="height: 250px;">
-              <li>
-                <a href="shop-item"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                <span class="cart-content-count">x 1</span>
-                <strong><a href="shop-item">Rolex Classic Watch</a></strong>
-                <em>$1230</em>
-                <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-              </li>
-              <li>
-                <a href="shop-item"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                <span class="cart-content-count">x 1</span>
-                <strong><a href="shop-item">Rolex Classic Watch</a></strong>
-                <em>$1230</em>
-                <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-              </li>
-              <li>
-                <a href="shop-item"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                <span class="cart-content-count">x 1</span>
-                <strong><a href="shop-item">Rolex Classic Watch</a></strong>
-                <em>$1230</em>
-                <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-              </li>
-              <li>
-                <a href="shop-item"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                <span class="cart-content-count">x 1</span>
-                <strong><a href="shop-item">Rolex Classic Watch</a></strong>
-                <em>$1230</em>
-                <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-              </li>
-              <li>
-                <a href="shop-item"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                <span class="cart-content-count">x 1</span>
-                <strong><a href="shop-item">Rolex Classic Watch</a></strong>
-                <em>$1230</em>
-                <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-              </li>
-              <li>
-                <a href="shop-item"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                <span class="cart-content-count">x 1</span>
-                <strong><a href="shop-item">Rolex Classic Watch</a></strong>
-                <em>$1230</em>
-                <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-              </li>
-              <li>
-                <a href="shop-item"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                <span class="cart-content-count">x 1</span>
-                <strong><a href="shop-item">Rolex Classic Watch</a></strong>
-                <em>$1230</em>
-                <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-              </li>
-              <li>
-                <a href="shop-item"><img src="/assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                <span class="cart-content-count">x 1</span>
-                <strong><a href="shop-item">Rolex Classic Watch</a></strong>
-                <em>$1230</em>
-                <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-              </li>
+              <% if(listCarts != null) { %>
+                <% for(let i = 0; i < listCarts.product.length; i++) { %>
+                <li>
+                  <a href="/shop-item/<%= listCarts.product[i]._id._id %>"><img src="<%= listCarts.product[i]._id.image %>" alt="Rolex Classic Watch" width="37" height="34"></a>
+                  <span class="cart-content-count">x <%= listCarts.product[i].quantity %></span>
+                  <strong><a href="/shop-item/<%= listCarts.product[i]._id._id %>"><%= listCarts.product[i]._id.name %></a></strong>
+                  <em><%= (listCarts.product[i]._id.price - (listCarts.product[i]._id.sale/100 * listCarts.product[i]._id.price)) * listCarts.product[i].quantity %> $</em>
+                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
+                </li>
+                <% } %>
+              <% } %>
+              <% if(listCarts == null) { %>
+                <li>
+                  <a href="/shop-product-list"><img src="/assets/pages/img/product-null.png" alt="Rolex Classic Watch" width="100%" height="100%"></a>
+                </li>
+              <% } %>
             </ul>   
             <div class="text-right">
               <a href="shop-shopping-cart" class="btn btn-default">View Cart</a>

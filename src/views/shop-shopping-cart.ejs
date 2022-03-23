@@ -44,76 +44,47 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     <th class="goods-page-price">Unit price</th>
                     <th class="goods-page-total" colspan="2">Total</th>
                   </tr>
-                  <tr>
-                    <td class="goods-page-image">
-                      <a href="javascript:;"><img src="assets/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
-                    </td>
-                    <td class="goods-page-description">
-                      <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-                      <p><strong>Item 1</strong> - Color: Green; Size: S</p>
-                      <em>More info is here</em>
-                    </td>
-                    <td class="goods-page-ref-no">
-                      javc2133
-                    </td>
-                    <td class="goods-page-quantity">
-                      <div class="product-quantity">
-                          <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-                      </div>
-                    </td>
-                    <td class="goods-page-price">
-                      <strong><span>$</span>47.00</strong>
-                    </td>
-                    <td class="goods-page-total">
-                      <strong><span>$</span>47.00</strong>
-                    </td>
-                    <td class="del-goods-col">
-                      <a class="del-goods" href="javascript:;">&nbsp;</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="goods-page-image">
-                      <a href="javascript:;"><img src="assets/pages/img/products/model4.jpg" alt="Berry Lace Dress"></a>
-                    </td>
-                    <td class="goods-page-description">
-                      <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-                      <p><strong>Item 1</strong> - Color: Green; Size: S</p>
-                      <em>More info is here</em>
-                    </td>
-                    <td class="goods-page-ref-no">
-                      javc2133
-                    </td>
-                    <td class="goods-page-quantity">
-                      <div class="product-quantity">
-                          <input id="product-quantity2" type="text" value="1" readonly class="form-control input-sm">
-                      </div>
-                    </td>
-                    <td class="goods-page-price">
-                      <strong><span>$</span>47.00</strong>
-                    </td>
-                    <td class="goods-page-total">
-                      <strong><span>$</span>47.00</strong>
-                    </td>
-                    <td class="del-goods-col">
-                      <a class="del-goods" href="javascript:;">&nbsp;</a>
-                    </td>
-                  </tr>
+                  <% let sumTotal = 0 %>
+                  <% if(listCarts != null) { %>
+                    <% for(let i = 0; i < listCarts.product.length; i++) { %>
+                    <tr>
+                      <td class="goods-page-image">
+                        <a href="javascript:;"><img src="<%= listCarts.product[i]._id.image%>" alt="Berry Lace Dress"></a>
+                      </td>
+                      <td class="goods-page-description">
+                        <h3><a href="javascript:;"><%= listCarts.product[i]._id.name %></a></h3>
+                        <p><strong>Item 1</strong> - Color: <%= listCarts.product[i].color %>; Size: <%= listCarts.product[i].size %></p>
+                        <em>More info is here</em>
+                      </td>
+                      <td class="goods-page-ref-no">
+                        javc2133
+                      </td>
+                      <td class="goods-page-quantity">
+                        <div class="product-quantity">
+                            <input id="product-quantity" type="text" value="<%= listCarts.product[i].quantity%>" readonly class="form-control input-sm">
+                        </div>
+                      </td>
+                      <td class="goods-page-price">
+                        <strong class="cart-price">$<%= (listCarts.product[i]._id.price - (listCarts.product[i]._id.sale/100 * listCarts.product[i]._id.price)) %></strong>
+                      </td>
+                      <td class="goods-page-total" >
+                        <strong class="cart-total">$<%= (listCarts.product[i]._id.price - (listCarts.product[i]._id.sale/100 * listCarts.product[i]._id.price)) * listCarts.product[i].quantity %></strong>
+                        <% sumTotal +=  (listCarts.product[i]._id.price - (listCarts.product[i]._id.sale/100 * listCarts.product[i]._id.price)) * listCarts.product[i].quantity %>
+                      </td>
+                      <td class="del-goods-col">
+                        <a href="/shop-delete-cartItem/<%= listCarts.product[i]._id._id %>" class="del-goods" href="javascript:;">&nbsp;</a>
+                      </td>
+                    </tr>
+                    <% } %>
+                  <% } %>
                 </table>
                 </div>
 
                 <div class="shopping-total">
                   <ul>
-                    <li>
-                      <em>Sub total</em>
-                      <strong class="price"><span>$</span>47.00</strong>
-                    </li>
-                    <li>
-                      <em>Shipping cost</em>
-                      <strong class="price"><span>$</span>3.00</strong>
-                    </li>
                     <li class="shopping-total-price">
                       <em>Total</em>
-                      <strong class="price"><span>$</span>50.00</strong>
+                      <strong class="price"><span>$</span><%= sumTotal%></strong>
                     </li>
                   </ul>
                 </div>
@@ -243,6 +214,12 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
     <![endif]-->  
     <%-include('layouts/scripts.ejs')-%>
     <!-- END PAGE LEVEL JAVASCRIPTS -->
+    <script>
+      // change quantity in cart change price
+      
+
+      
+    </script>
 </body>
 <!-- END BODY -->
 </html>

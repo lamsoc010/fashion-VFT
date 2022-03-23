@@ -135,30 +135,32 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                   <div class="description">
                     <p><%= detailProduct.description %></p>
                   </div>
-                  <div class="product-page-options">
-                    <div class="pull-left">
-                      <label class="control-label">Size:</label>
-                      <select class="form-control input-sm">
-                        <% for(let i =0; i < detailProduct.storage.length; i++) { %>
-                        <option value="<%= detailProduct.storage[i].size %>"><%= detailProduct.storage[i].size %></option>
-                        <%}%>
-                      </select>
-                    </div>
-                    <div class="pull-left">
-                      <label class="control-label">Color:</label>
-                      <select class="form-control input-sm">
+                  <form action="/shop-add-cartItem/<%= detailProduct._id %>" method="POST" enctype="multipart/form-data">
+                    <div class="product-page-options">
+                      <div class="pull-left">
+                        <label class="control-label">Size:</label>
+                        <select class="form-control input-sm" name="size">
                           <% for(let i =0; i < detailProduct.storage.length; i++) { %>
-                          <option value="<%= detailProduct.storage[i].color %>"><%= detailProduct.storage[i].color %></option>
+                          <option value="<%= detailProduct.storage[i].size %>"><%= detailProduct.storage[i].size %></option>
                           <%}%>
-                      </select>
+                        </select>
+                      </div>
+                      <div class="pull-left">
+                        <label class="control-label">Color:</label>
+                        <select class="form-control input-sm" name="color">
+                            <% for(let i =0; i < detailProduct.storage.length; i++) { %>
+                            <option value="<%= detailProduct.storage[i].color %>"><%= detailProduct.storage[i].color %></option>
+                            <%}%>
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                  <div class="product-page-cart">
-                    <div class="product-quantity">
-                        <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
+                    <div class="product-page-cart">
+                      <div class="product-quantity">
+                          <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm" name="quantity">
+                      </div>
+                      <button class="btn btn-primary" type="submit">Add to cart</button>
                     </div>
-                    <a href="/shop-add-cartItem/<%= detailProduct._id %>" class="btn btn-primary" type="submit">Add to cart</a>
-                  </div>
+                  </form>
                   <div class="review">
                     <input type="range" value="4" step="0.25" id="backing4">
                     <div class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">

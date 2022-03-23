@@ -31,12 +31,17 @@ let getFakeApiProduct = (req, res, next) => {
     }
 }
 global.listCarts = null;
-let getHomepage = async (req, res) => {
+let getListCarts = async (req, res, next) => {
     if(req.session.userId) {
         const listCart = await Cart.findOne({userId: req.session.userId}).populate('product._id');
         listCarts = listCart;
-        return res.render('shop-index');
+        next();
+    } else {
+        next();
     }
+}
+
+let getHomepage = (req, res) => {
     return res.render('shop-index');
 }
 let getShopItem = (req, res) => {
@@ -57,14 +62,23 @@ let getShopCheckout = (req, res) => {
 // Phân trang
 let getShopProductList = (req, res) => {
     let page = req.query.page || 1;
+    let sort = req.query.sort || 'name';
     if(page) {
         // get page
         page = parseInt(page);
-        
+        let mySort;
+        if(sort == 'name') {
+            mySort = {name: 1};
+        } else if(sort == 'price'){
+            mySort = {price: 1};
+        }
+
+        console.log(mySort);
         page = (page < 1) ? 1 : page;
 
         let skip = (page - 1) * PAGE_SIZE;
         Product.find({})
+        .sort(mySort)
         .skip(skip) 
         .limit(PAGE_SIZE)
         .exec((err, products) => {
@@ -77,20 +91,7 @@ let getShopProductList = (req, res) => {
                 })
             })
         })
-    } else {
-        // get all
-        Pagination.find({})
-        .then(data => {
-            res.render('shop-product-list', {
-                products,
-                current: page,
-                pages: Math.ceil(data.length / PAGE_SIZE)
-            })
-        })
-        .catch(err => { 
-            res.status(500).json('loi server');
-        })
-    }
+    } 
 }
 let getShopIndexHeader = (req, res) => {
     return res.render('shop-index-header-fix');
@@ -111,6 +112,17 @@ let getShopShoppingCartNull = (req, res) => {
     return res.render('shop-shopping-cart-null');
 }
 
+// middleware
+let checkNullProduct = (req, res, next) => {
+    if(req.session.userId) {
+        if(listCarts.product.length === 0) {
+            return res.redirect('/shop-shopping-cart-null');
+        } else {next();}
+    } else {
+        return res.redirect('/shop-shopping-cart-null');
+    }
+}
+
 
 module.exports = {
     getHomepage,
@@ -124,6 +136,8 @@ module.exports = {
     getShopStandartForms,
     getShopContacts,
     getShopShoppingCartNull,
-    getFakeApiProduct
+    getFakeApiProduct,
+    getListCarts,
+    checkNullProduct
 
 }

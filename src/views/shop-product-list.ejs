@@ -142,16 +142,10 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 </div>
                 <div class="pull-right">
                   <label class="control-label">Sort&nbsp;By:</label>
-                  <select class="form-control input-sm">
+                  <select class="form-control input-sm" onchange="sortProduct(this.value)">
                     <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
-                    <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-                    <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                    <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-                    <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-                    <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
-                    <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
-                    <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
-                    <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
+                    <option value="name">Name (A - Z)</option>
+                    <option value="price">Price (Low &gt; High)</option>
                   </select>
                 </div>
               </div>
@@ -167,7 +161,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     <img src="<%= products[i].image[0]%>" class="img-responsive" alt="Berry Lace Dress">
                     <div>
                       <a href="<%= products[i].image[0]%>" class="btn btn-default fancybox-button">Zoom</a>
-                      <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                      <a onclick="viewFastProduct('<%= JSON.stringify(products[i]) %>')" href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>
                   <h3><a href="/shop-item/<%= products[i]._id %>"><%= products[i].name %></a></h3>
@@ -229,7 +223,10 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
     <!-- END FOOTER -->
 
     <!-- BEGIN fast view of a product -->
-    <%- include('layouts/viewFastProduct.ejs') -%>
+    <!-- <%- include('layouts/viewFastProduct.ejs') -%> -->
+    <div id="product-pop-up" style="display: none; width: 700px;">
+
+    </div>
     <!-- END fast view of a product -->
 
     <!-- Load javascripts at bottom, this will reduce page load time -->
@@ -239,6 +236,26 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
     <![endif]-->  
     <%- include('layouts/scripts.ejs') -%>
     <!-- END PAGE LEVEL JAVASCRIPTS -->
+    <script>
+      function sortProduct(sort) {
+        // let products = JSON.parse(jsonProducts);
+        // console.log(products)
+        // if(sort == 'sortName') {
+        //   const filteredData = products.filter(x => x.avail).sort((a, b) => a.id - b.id);
+        //   console.log(filteredData);
+        // }
+        let url = window.location.href;
+        if(window.location.search.length == 0) {
+          window.location.href = `${url}?sort=${sort}`;
+        } else if(window.location.search.indexOf('&') != -1){
+          window.location.href = `${window.location.href.substr(0, window.location.href.indexOf('&'))}&sort=${sort}`;
+        } else {
+          window.location.href = `${window.location.href}&sort=${sort}`;
+        }
+
+      }
+      console.log(window.location.href.substr(0, window.location.href.indexOf('&')));
+    </script>
 </body>
 <!-- END BODY -->
 </html>
