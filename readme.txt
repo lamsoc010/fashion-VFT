@@ -8,3 +8,9 @@ Looking for a perfect premium bootstrap admin theme for your project ? You got t
 http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
 
 Happy coding!  Don't miss a stuff from us - http://twitter.com/keenthemes
+
+
+install
+
+
+npm i nodemon --save-dev

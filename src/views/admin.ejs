@@ -10,8 +10,6 @@
     <link rel="icon" href="../img/myLogo.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/pages/css/admin.css">
     <title>Admin</title>
-
-
 </head>
 
 <body>
@@ -177,7 +175,7 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" scope="col">#</th>
+                                        <th class="text-center" scope="col">STT</th>
                                         <th class="text-center" scope="col">Ảnh</th>
                                         <th class="text-center" scope="col">Tên sản phẩm</th>
                                         <th class="text-center" scope="col">Loại sản phẩm</th>
@@ -218,7 +216,7 @@
                             <h4 class="text-primary  my-3">Thêm sản phẩm</h4>
 
 
-                            <form id="form-addproduct" method="POST" action="/store/product" enctype="multipart/form-data">
+                            <form id="form-addproduct" method="POST" action="/admin/product" enctype="multipart/form-data">
 
                                 <div class="mb-3 ">
                                     <div class="d-flex">
@@ -232,7 +230,7 @@
                                     <div class="d-flex">
                                         <label class="col-md-2 fw-bold col-form-label">Loại sản phẩm:</label>
                                         <div class="col-md-6">
-                                            <select id="type-product" name="type" class="form-select ">
+                                            <select id="type-product" name="productType" class="form-select ">
                                                 <option value="chairs" selected>Chairs</option>
                                                 <option value="beds">Beds</option>
                                                 <option value="accesories">Accesories</option>
@@ -258,6 +256,38 @@
                                             <input type="text" class="form-control" name="description" required>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <select id="type-product" name="size" class="form-select ">
+                                            <option selected>Choose size</option>
+                                            <option value="S">Size S</option>
+                                            <option value="L">Size L</option>
+                                            <option value="XL">Size XL</option>
+                                            <option value="XXL">Size XXL</option>
+                                           
+                                          </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="amount">Số lượng</label>
+                                        <input type="number" name="amount" id="amount" min="1">
+                                    </div>
+                                   
+                                </div>
+                                <div class="row">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="color" value="white" id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          White
+                                        </label>
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="color" value="black" id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                          Black
+                                        </label>
+                                      </div>
                                 </div>
                                 <div class="mb-3">
                                     <div class="d-flex">
@@ -373,11 +403,9 @@
     <script>
         let updateButton = document.querySelector('.update');
         updateButton.style.display = "none";
-
         function update(id) {
             console.log(typeof id)
         }
-
     </script>
 
 

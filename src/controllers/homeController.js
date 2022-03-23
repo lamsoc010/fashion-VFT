@@ -1,6 +1,7 @@
 import Product from '../models/Product';
 import Cart from '../models/Cart';
 import { faker } from '@faker-js/faker';
+const product = require('../models/Product');
 
 const PAGE_SIZE = 9;
 
@@ -51,8 +52,16 @@ let getShopItem = (req, res) => {
 let getShopAccout = (req, res) => {
     return res.render('shop-account');
 }
+let testAdmin = async (req, res) => {
+    const allProduct = await product.find();
+    return res.render('testAdmin', {allProduct});
+}
 let getShopCheckout = (req, res) => {
     return res.render('shop-checkout');
+}
+let editProduct =async (req, res) => {
+    const searchProduct = await product.findById(req.params.id)
+    return res.render('editProduct', {searchProduct});
 }
 // Phân trang
 let getShopProductList = (req, res) => {
@@ -113,6 +122,8 @@ let getShopShoppingCartNull = (req, res) => {
 
 
 module.exports = {
+    editProduct,
+    testAdmin,
     getHomepage,
     getShopItem,
     getShopAccout,

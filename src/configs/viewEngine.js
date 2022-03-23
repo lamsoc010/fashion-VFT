@@ -2,10 +2,14 @@ import express from "express";
 import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
 import expressSession from "express-session";
+import morgan from "morgan";
 
 
 const configViewEngine = (app) => {
     app.use(fileUpload());
+
+    
+    app.use(morgan("common"));
 
     app.use(express.static('./src/public'))
     

@@ -19,6 +19,8 @@ global.userIn = null;
 let getUserIn = (req, res, next) => {
 
     User.findById(req.session.userId, (err, user) => {
+
+        // why
         if(!err) {
             global.userIn = user;
             next();
@@ -28,6 +30,8 @@ let getUserIn = (req, res, next) => {
 
 let checkLoginAdmin = (req, res, next) => {
     User.findById(req.session.adminId, (err, user) => {
+
+        // why
         if(!err && user) {
             next();
         } else {
