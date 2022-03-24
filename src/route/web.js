@@ -30,7 +30,6 @@ const initWebRoute = (app) => {
     router.get('/', homeController.getHomepage);
     router.get('/shop-item/:id', homeController.getShopItem)
     router.get('/testAdmin', homeController.testAdmin)
-    router.get('/product/:id/edit', homeController.editProduct)
     router.get('/shop-account', homeController.getShopAccout)
     router.get('/shop-checkout', homeController.getShopCheckout)
     router.get('/shop-product-list', homeController.getShopProductList)

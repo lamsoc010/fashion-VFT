@@ -7,6 +7,7 @@ const productController = {
 // ADD A PRODUCT
     addProduct : async (req, res) =>{
         let image = req.files.image;
+        image.name = Date.now() +image.name;
         // res.json(image)
         image.mv(path.resolve(__dirname, '../public/assets/upload', image.name), (error) => {
             product.create({
@@ -16,7 +17,7 @@ const productController = {
                 if(err){
                     return res.send("eror")
                 }
-                res.redirect('/')
+                res.redirect('back')
             })
         })
     },
@@ -39,7 +40,7 @@ const productController = {
         try {
             const proUpdate = await product.findById(req.params.id);
             await proUpdate.updateOne({$set: req.body});
-         return res.redirect('/admin')
+            res.redirect('back')
            
         } catch (error) {
             console.log('update fail')

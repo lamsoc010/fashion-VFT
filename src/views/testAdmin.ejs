@@ -2,390 +2,573 @@
 <html lang="en">
 
 <%- include('layouts/headAdmin.ejs') %>
-
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2 menager">
-                <div class="header-banner fw-bold">
-                    <div id="data_main" class="text-primary text-uppercase" onclick="turn_on(1)"><span><i
-                                class="fa fa-folder-open-o" aria-hidden="true"></i></span> Dữ liệu gốc</div>
-                    <div id="options01">
-                        <p>Kế hoạch lựa chọn nhà thầu</p>
-                        <p>Thông tin đấu thầu</p>
-                        <p>Mở/đóng/chấm thầu</p>
-                        <p>kết quả đấu thầu</p>
-                        <p>Các bên liên quan</p>
-                    </div>
-                    <div id="bitdata" class="text-primary text-uppercase" onclick="turn_on(2)"><span><i
-                                class="fa fa-folder-open-o" aria-hidden="true"></i></span> Thống kê bitdata</div>
-                    <div id="options02">
-                        <p>Quản lý danh mục sản phẩm</p>
-                        <a href="thongKeOto.html">
-                            <p>Báo cáo sản phẩm bán chạy</p>
-                        </a>
-                        <a href="trangThaiMua.html">
-                            <p>Trạng thái đơn hàng</p>
-                        </a>
-                        <p>Biểu đồ thống kê</p>
-                    </div>
-                    <div id="menagerment" class="text-primary text-uppercase" onclick="turn_on(3)"><span><i
-                                class="fa fa-folder-open-o" aria-hidden="true"></i></span> Quản trị</div>
-                    <div id="options03">
-                        <a href="taikhoanKH.html">
-                            <p>Người dùng</p>
-                        </a>
-                        <div class="show_Nguoi_dung">
-                            <a href="khachHang.html">
-                                <p> Đăng kí lái xe</p>
-                            </a>
-                            <p>Quản lý danh mục ô tô</p>
+<style>
+    div#tablePage_wrapper {
+    width: 1200px;
+}
+</style>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 menager ">
+                    <div class="header-banner fw-bold">
+                        <div id="data_main" class="text-primary text-uppercase" onclick="turn_on(1)"><span><i
+                                    class="fa fa-folder-open-o" aria-hidden="true"></i></span> Dữ liệu gốc</div>
+                        <div id="options01">
+                            <p>Kế hoạch lựa chọn nhà thầu</p>
+                            <p>Thông tin đấu thầu</p>
+                            <p>Mở/đóng/chấm thầu</p>
+                            <p>kết quả đấu thầu</p>
+                            <p>Các bên liên quan</p>
                         </div>
-                        <p>Chức năng hệ thống</p>
-                        <p>Danh mục dùng chung</p>
-                        <p>Từ khóa</p>
-                        <a href="Trangchu.html">
-                            <p>Quay lại trang chủ</p>
-                        </a>
+                        <div id="bitdata" class="text-primary text-uppercase" onclick="turn_on(2)"><span><i
+                                    class="fa fa-folder-open-o" aria-hidden="true"></i></span> Thống kê bitdata</div>
+                        <div id="options02">
+                            <p>Quản lý danh mục sản phẩm</p>
+                            <a href="thongKeOto.html">
+                                <p>Báo cáo sản phẩm bán chạy</p>
+                            </a>
+                            <a href="trangThaiMua.html">
+                                <p>Trạng thái đơn hàng</p>
+                            </a>
+                            <p>Biểu đồ thống kê</p>
+                        </div>
+                        <div id="menagerment" class="text-primary text-uppercase" onclick="turn_on(3)"><span><i
+                                    class="fa fa-folder-open-o" aria-hidden="true"></i></span> Quản trị</div>
+                        <div id="options03">
+                            <a href="taikhoanKH.html">
+                                <p>Người dùng</p>
+                            </a>
+                            <div class="show_Nguoi_dung">
+                                <a href="khachHang.html">
+                                    <p> Đăng kí lái xe</p>
+                                </a>
+                                <p>Quản lý danh mục ô tô</p>
+                            </div>
+                            <p>Chức năng hệ thống</p>
+                            <p>Danh mục dùng chung</p>
+                            <p>Từ khóa</p>
+                            <a href="Trangchu.html">
+                                <p>Quay lại trang chủ</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-10 main-header">
-                <!--  chức năng  -->
-
-                <div class="row header">
-                    <div class="add-product">
-
-                        <h4 class="text-primary  my-3">Thêm sản phẩm</h4>
-
+                <div class="col-md-10 main-header ">
+                    <!-- form -->
+                    <div class="container-fluid border border-primary">
                         <!-- form thêm sản phẩm -->
-                        <div id="addProduct"></div>
+                        <div id="addProduct">
+                            <h4 class="text-primary  my-3">Thêm sản phẩm</h4>
+                            <form id="elements" name="form-addproduct" method="POST" action="/admin/product"
+                                enctype="multipart/form-data">
+                                <div class="row px-4">
+                                    <div class="col-md-6">
+                                        <!--  Tên sản phẩm -->
+                                        <div class="row pr-3">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-default">Tên
+                                                        sản phẩm:</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="name" required id="name"
+                                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <!-- giá -->
+                                            <div class="col-md-6 ml-0 px-0">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Giá (VNĐ)</span>
+                                                    </div>
+                                                    <input type="number" class="form-control" name="price" required
+                                                        id="price" aria-label="Amount (to the nearest dollar)" min="0">
+                                                </div>
+                                            </div>
+                                            <!-- số lượng -->
+                                            <div class="col-md-6 ">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Số lượng</span>
+                                                    </div>
+                                                    <input type="number" name="amount" min="0" id="amount"
+                                                        class="form-control" required
+                                                        aria-label="Amount (to the nearest dollar)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- loại sản phẩm -->
+                                        <div class="row">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01">Loại sản
+                                                        phẩm</label>
+                                                </div>
+                                                <select class="custom-select" id="type-product" name="productType">
+                                                    <option selected>Choose...</option>
+                                                    <option value="Thu đông">Thu đông</option>
+                                                    <option value="Hè">Hè</option>
+                                                    <option value="Thời trang nam">Thời trang nam</option>
+                                                    <option value="Thời trang nữ">Thời trang nữ</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Size -->
+                                        <div class="row">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01">Size sản
+                                                        phẩm</label>
+                                                </div>
+                                                <select class="custom-select" id="size-product" name="size">
+                                                    <option selected>Choose...</option>
+
+                                                    <option value="S">Size S</option>
+                                                    <option value="L">Size L</option>
+                                                    <option value="XL">Size XL</option>
+                                                    <option value="XXL">Size XXL</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- mô tả -->
+                                <div class="input-group px-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Mô tả</span>
+                                    </div>
+                                    <textarea class="form-control" aria-label="With textarea" name="description"
+                                        required id="description"></textarea>
+                                </div>
+                                <div class="row px-2">
+                                    <div class="col-md-6">
+                                        <!-- color -->
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect01">Chọn
+                                                    màu</label>
+                                            </div>
+                                            <select class="custom-select" id="type-product" name="color">
+                                                <option selected>Choose...</option>
+                                                <option value="Màu trắng">Màu trắng</option>
+                                                <option value="Màu đen">Màu đen</option>
+                                                <option value="Màu đỏ">Màu đỏ</option>
+                                                <option value="màu xanh dương">màu xanh dương</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- iamge -->
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <!-- <span class="input-group-text">Upload</span> -->
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                    name="image">
+                                                <label class="custom-file-label" for="inputGroupFile01">Upload file
+                                                    image</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="text-center me-5">
+                                        <button type="submit" class="create btn btn-primary me-5">Thêm sản
+                                            phẩm</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <div id="editProduct"></div>
                     </div>
-                </div>
 
-                <div class="row" id="edit">
-                    <div class="btn btn-success" id="addkhachHangs" onclick="addkhachHang()">Thêm khách hàng</div>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
-                            data-toggle="dropdown" aria-expanded="false">
-                            Sắp xếp thông tin
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                            <li><a class="dropdown-item active" href="#" onclick="sortHeight()">Sắp xếp cao => thấp</a>
-                            </li>
-                            <li><a class="dropdown-item" href="#" onclick="sortLow()">Sắp xếp thấp => cao</a></li>
-                            <li><a class="dropdown-item" href="#" onclick='sortABC()'>Sắp xếp theo tên</a></li>
-                        </ul>
+                    <!-- tìm kiếm sản phẩm -->
+                    <!-- <div class="row">
+                        <input itemid="search" type="text" name="" id="search" onkeyup="search()"
+                            placeholder="tìm kiếm sản phẩm...">
+                    </div> -->
+                    <!-- table -->
+                    <div class="row  itemKhachHang my-5 mx-1">
+                        <h3><span class="text-danger"><i class="fa fa-home" aria-hidden="true"></i>
+                            </span> danh sách sản phẩm</h3>
+                        <!-- <table class="table table-sm table-striped table-hover table-bordered" id="tablePage"> -->
+                            <table id="tablePage" class="display nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>#STT</th>
+                                    <th>HÌNH ẢNH</th>
+                                    <th>TÊN SẢN PHẨM</th>
+                                    <th>GIÁ</th>
+                                    <th>TỔNG SỐ LƯỢNG</th>
+                                    <th>THỜI GIAN</th>
+                                    <th>CHỈNH SỬA</th>
+                                    <th>XÓA</th>
+                                </tr>
+                            </thead>
+                            <tbody id="after_run">
+
+                                <% for(var i=0; i < allProduct.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= i+1 %>
+                                        </td>
+                                        <td><img src="<%= allProduct[i].image %>" alt="" width="100px" height="100px">
+                                        </td>
+                                        <td>
+                                            <%= allProduct[i].name %>
+                                        </td>
+                                        <td>
+                                            <%= allProduct[i].price %>
+                                        </td>
+                                        <td>
+                                            <%= allProduct[i].amount %>
+                                        </td>
+                                        <td>
+                                            <%= i %>
+                                        </td>
+
+                                        <td>
+                                            <a id='tr_99' class='text-warning'
+                                                onclick="edit('<%= JSON.stringify(allProduct[i])%>', '<%= allProduct[i].id %>')">
+                                                <i class="fa fa-pencil-square-o  aria-hidden=" true"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="" class='btn btn-link' data-toggle="modal"
+                                                data-target="#delete-product-model" data-id="<%= allProduct[i].id %>">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                <!-- xoa -->
+                                            </a>
+                                        </td>
+                                        <% }%>
+                                            <!-- confirm  -->
+                                            <div class="modal fade" id="delete-product-model" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm
+                                                            </h5>
+                                                            <button type="button" class="btn-close border-0"
+                                                                data-dismiss="modal" aria-label="Close">X</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Bạn chắc chắn muốn xóa sản phẩm
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-dark"
+                                                                data-dismiss="modal">Hủy</button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                id="btn-delete-product">Xóa bỏ</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                    </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="row">
-                    <input itemid="search" type="text" name="" id="search" onkeyup="search()"
-                        placeholder="tìm kiếm sản phẩm...">
-                </div>
-                <!-- /chức năng -->
-                <!-- </form> -->
-                <div class="row  itemKhachHang">
-                    <h3><span class="text-danger"><i class="fa fa-home" aria-hidden="true"></i></span> danh sách người
-                        dùng</h3>
-                    <table class="table table-sm table-striped table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#STT</th>
-                                <th>HÌNH ẢNH</th>
-                                <th>TÊN SẢN PHẨM</th>
-                                <th>GIÁ</th>
-                                <th>TỔNG SỐ LƯỢNG</th>
-                                <th>THỜI GIAN</th>
-                                <th>CHỈNH SỬA</th>
-                                <th>XÓA</th>
-                            </tr>
-                        </thead>
-                        <tbody id="after_run">
-                            
-                            <% for(i; i < allProduct.length; i++) { %>
-                                <tr>
-                                    <td>
-                                        <%= i+1 %>
-                                    </td>
-                                    <td><img src="<%= allProduct[i].image %>" alt="" width="100px" height="100px"></td>
-                                    <td>
-                                        <%= allProduct[i].name %>
-                                    </td>
-                                    <td>
-                                        <%= allProduct[i].price %>
-                                    </td>
-                                    <td>
-                                        <%= allProduct[i].amount %>
-                                    </td>
-                                    <td>
-                                        <%= i %>
-                                    </td>
-                                    
-                                    <td>
-                                        <a id='tr_99' class='text-warning' onclick='edit(`<%= i %>`)'> 
-                                            <i class="fa fa-pencil-square-o  aria-hidden=" true"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href=""  class='btn btn-link' data-toggle="modal" data-target="#delete-product-model" data-id="<%= allProduct[i].id %>"> 
-                                            <i class="fa fa-trash-o" aria-hidden="true" ></i>
-                                            <!-- xoa -->
-                                        </a>
-                                    </td>
-                                    <% }%>
-                                          <!-- confirm  -->
-                                          <div class="modal fade" id="delete-product-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title" id="exampleModalLabel">Xóa sản phẩm</h5>
-                                                  <button type="button" class="btn-close border-0" data-dismiss="modal" aria-label="Close">X</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                  Bạn chắc chắn muốn xóa sản phẩm
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn btn-dark" data-dismiss="modal">Hủy</button>
-                                                  <button type="button" class="btn btn-danger" id="btn-delete-product">Xóa bỏ</button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-          <!-- / -->
-                                </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
-     
+
+            </div>
         </div>
-    </div>\
-    <!-- Delete hidden form -->
-    <form method="POST" name="delete-product-form"></form>
-</body>
+        <!-- Delete hidden form -->
+        <form method="POST" name="delete-product-form"></form>
+    </body>
 
 </html>
 <!-- <script type="text/javascript" src="assets/public-VN/jscript/khachHang.js"></script> -->
 <script type="text/javascript" src="assets/public-VN/jscript/menagerment.js"></script>
 <script>
-    // class product {
-    //     constructor(id, name, image,  size, color, amount, description, productType) {
-    //         this.id = id;
-    //         this.name = name;
-    //         this.image = image;
-    //         this.size = size;
-    //         this.color = color;
-    //         this.amount = amount;
-    //         this.description = description;
-    //         this.productType = productType;
-    //     }
-    // }
-
-  
-    
     var addproduct = document.getElementById('addProduct');
     var editProduct = document.getElementById('editProduct');
     $(document).ready(function () {
-        
-        addproduct.innerHTML = 
-       ` <form id="elements" name="form-addproduct" method="POST"
-                            action="/admin/product" enctype="multipart/form-data">
+        $('#tablePage').DataTable( {
+        // ajax:           "../data/2500.txt",
+        deferRender:    true,
+        scrollY:        600,
+        scrollCollapse: true,
+        scroller:       true
+         } );
+        let numberPage = document.getElementsByClassName('tablePage_length')
+        // let giaTri = numberPage.options[].text;
+        // console.log(giaTri)
 
-                            <div class="mb-3 ">
-                                <div class="d-flex">
-                                    <label class="col-md-2 fw-bold col-form-label">Tên sản phẩm:</label>
+
+
+        addproduct.innerHTML = `
+            <h4 class="text-primary  my-3">Thêm sản phẩm</h4>
+                            <form id="elements" name="form-addproduct" method="POST" action="/admin/product"
+                                enctype="multipart/form-data">
+                                <div class="row px-4">
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" name="name" required id="name">
+                                        <!--  Tên sản phẩm -->
+                                        <div class="row pr-3">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-default">Tên
+                                                        sản phẩm:</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="name" required id="name"
+                                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <!-- giá -->
+                                            <div class="col-md-6 ml-0 px-0">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Giá (VNĐ)</span>
+                                                    </div>
+                                                    <input type="number" class="form-control" name="price" required
+                                                        id="price" aria-label="Amount (to the nearest dollar)" min="0">
+                                                </div>
+                                            </div>
+                                            <!-- số lượng -->
+                                            <div class="col-md-6 ">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Số lượng</span>
+                                                    </div>
+                                                    <input type="number" name="amount" min="0" id="amount"
+                                                        class="form-control" required
+                                                        aria-label="Amount (to the nearest dollar)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- loại sản phẩm -->
+                                        <div class="row">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01">Loại sản
+                                                        phẩm</label>
+                                                </div>
+                                                <select class="custom-select" id="type-product" name="productType">
+                                                    <option selected>Choose...</option>
+                                                    <option value="Thu đông">Thu đông</option>
+                                                    <option value="Hè">Hè</option>
+                                                    <option value="Thời trang nam">Thời trang nam</option>
+                                                    <option value="Thời trang nữ">Thời trang nữ</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Size -->
+                                        <div class="row">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01">Size sản
+                                                        phẩm</label>
+                                                </div>
+                                                <select class="custom-select" id="size-product" name="size">
+                                                    <option selected>Choose...</option>
+
+                                                    <option value="S">Size S</option>
+                                                    <option value="L">Size L</option>
+                                                    <option value="XL">Size XL</option>
+                                                    <option value="XXL">Size XXL</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mb-3 ">
-                                <div class="d-flex">
-                                    <label class="col-md-2 fw-bold col-form-label">Loại sản phẩm:</label>
+                                <!-- mô tả -->
+                                <div class="input-group px-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Mô tả</span>
+                                    </div>
+                                    <textarea class="form-control" aria-label="With textarea" name="description"
+                                        required id="description"></textarea>
+                                </div>
+                                <div class="row px-2">
                                     <div class="col-md-6">
-                                        <select id="type-product" name="productType" class="form-select ">
-                                            <option value="chairs" selected>Chairs</option>
-                                            <option value="beds">Beds</option>
-                                            <option value="accesories">Accesories</option>
-                                            <option value="furniture">Furniture</option>
-                                            <option value="homedemo">Home Demo</option>
+                                        <!-- color -->
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect01">Chọn
+                                                    màu</label>
+                                            </div>
+                                            <select class="custom-select" id="type-product" name="color">
+                                                <option selected>Choose...</option>
+                                                <option value="Màu trắng">Màu trắng</option>
+                                                <option value="Màu đen">Màu đen</option>
+                                                <option value="Màu đỏ">Màu đỏ</option>
+                                                <option value="màu xanh dương">màu xanh dương</option>
+                                            </select>
+                                        </div>
 
-                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- iamge -->
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <!-- <span class="input-group-text">Upload</span> -->
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                    name="image">
+                                                <label class="custom-file-label" for="inputGroupFile01">Upload file
+                                                    image</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mb-3 ">
-                                <div class="d-flex">
-                                    <label class="col-md-2 fw-bold col-form-label">Giá:</label>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="price" required id="price">
+                                <div class="mb-3">
+                                    <div class="text-center me-5">
+                                        <button type="submit" class="create btn btn-primary me-5">Thêm sản
+                                            phẩm</button>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="d-flex">
-                                    <label class="col-md-2 fw-bold col-form-label">Mô tả</label>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="description" required
-                                            id="description">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <select id="size-product" name="size" class="form-select ">
-                                        <option selected>Choose size</option>
-                                        <option value="S">Size S</option>
-                                        <option value="L">Size L</option>
-                                        <option value="XL">Size XL</option>
-                                        <option value="XXL">Size XXL</option>
-
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="amount">Số lượng</label>
-                                    <input type="number" name="amount" id="amount" min="1">
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="color" value="white"
-                                        id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        White
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="color" value="black"
-                                        id="flexRadioDefault2" checked>
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Black
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="d-flex">
-                                    <label class="col-md-2 fw-bold col-form-label">Ảnh sản phẩm:</label>
-                                    <div class="col-md-6">
-                                        <input type="file" class="form-control" name="image" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="text-center me-5">
-                                    <button type="submit" class="create btn btn-primary me-5">Thêm sản phẩm</button>
-                                </div>
-                            </div>
-                        </form>`
+                            </form>`
     });
-    function edit(i) {
+    function edit(product, id) {
+        var allProduct = JSON.parse(product)
         // let product = i;
         addproduct.innerHTML = ``
-       
-       editProduct.innerHTML = 
-       ` <form id="elements" name="form-addproduct" method="POST"
-                            action="/admin/product/<%=allProduct[1].id%>?_method=PUT" enctype="multipart/form-data">
 
-                            <div class="mb-3 ">
-                                <div class="d-flex">
-                                    <label class="col-md-2 fw-bold col-form-label">Tên sản phẩm:</label>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="name" required id="name">
+        editProduct.innerHTML =
+            ` 
+            <h4 class="text-primary my-3 ">Chỉnh sửa thông tin sản phẩm</h4>
+            <form id="elements" name="form-addproduct" method="POST" action="/admin/product/${id}?_method=PUT" enctype="multipart/form-data"
+                enctype="multipart/form-data">
+                <div class="row px-4">
+                    <div class="col-md-6">
+                        <!--  Tên sản phẩm -->
+                        <div class="row pr-3">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Tên
+                                        sản phẩm:</span>
+                                </div>
+                                <input type="text" class="form-control" name="name" required id="name"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- giá -->
+                            <div class="col-md-6 ml-0 px-0">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Giá (VNĐ)</span>
                                     </div>
+                                    <input type="number" class="form-control" name="price" required
+                                        id="price" aria-label="Amount (to the nearest dollar)" min="0">
                                 </div>
                             </div>
-                            <div class="mb-3 ">
-                                <div class="d-flex">
-                                    <label class="col-md-2 fw-bold col-form-label">Loại sản phẩm:</label>
-                                    <div class="col-md-6">
-                                        <select id="type-product" name="productType" class="form-select ">
-                                            <option value="chairs" selected>Chairs</option>
-                                            <option value="beds">Beds</option>
-                                            <option value="accesories">Accesories</option>
-                                            <option value="furniture">Furniture</option>
-                                            <option value="homedemo">Home Demo</option>
+                            <!-- số lượng -->
+                            <div class="col-md-6 ">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Số lượng</span>
+                                    </div>
+                                    <input type="number" name="amount" min="0" id="amount"
+                                        class="form-control" required
+                                        aria-label="Amount (to the nearest dollar)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- loại sản phẩm -->
+                        <div class="row">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Loại sản
+                                        phẩm</label>
+                                </div>
+                                <select class="custom-select" id="type-product" name="productType">
+                                    <option selected>Choose...</option>
+                                    <option value="Thu đông">Thu đông</option>
+                                    <option value="Hè">Hè</option>
+                                    <option value="Thời trang nam">Thời trang nam</option>
+                                    <option value="Thời trang nữ">Thời trang nữ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Size -->
+                        <div class="row">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Size sản
+                                        phẩm</label>
+                                </div>
+                                <select class="custom-select" id="size-product" name="size">
+                                    <option selected>Choose...</option>
 
-                                        </select>
-                                    </div>
-                                </div>
+                                    <option value="S">Size S</option>
+                                    <option value="L">Size L</option>
+                                    <option value="XL">Size XL</option>
+                                    <option value="XXL">Size XXL</option>
+                                </select>
                             </div>
-                            <div class="mb-3 ">
-                                <div class="d-flex">
-                                    <label class="col-md-2 fw-bold col-form-label">Giá:</label>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="price" required id="price">
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- mô tả -->
+                <div class="input-group px-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Mô tả</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea" name="description"
+                        required id="description"></textarea>
+                </div>
+                <div class="row px-2">
+                    <div class="col-md-6">
+                        <!-- color -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Chọn
+                                    màu</label>
                             </div>
-                            <div class="mb-3">
-                                <div class="d-flex">
-                                    <label class="col-md-2 fw-bold col-form-label">Mô tả</label>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="description" required
-                                            id="description">
-                                    </div>
-                                </div>
-                            </div>
+                            <select class="custom-select" id="type-product" name="color">
+                                <option selected>Choose...</option>
+                                <option value="Màu trắng">Màu trắng</option>
+                                <option value="Màu đen">Màu đen</option>
+                                <option value="Màu đỏ">Màu đỏ</option>
+                                <option value="màu xanh dương">màu xanh dương</option>
+                            </select>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <select id="size-product" name="size" class="form-select ">
-                                        <option selected>Choose size</option>
-                                        <option value="S">Size S</option>
-                                        <option value="L">Size L</option>
-                                        <option value="XL">Size XL</option>
-                                        <option value="XXL">Size XXL</option>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- iamge -->
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <!-- <span class="input-group-text">Upload</span> -->
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                    name="image">
+                                <label class="custom-file-label" for="inputGroupFile01">Upload file
+                                    image</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="text-center me-5">
+                        <button type="submit" class="create btn btn-primary me-5">Chỉnh sửa</button>
+                    </div>
+                </div>
+            </form>`
 
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="amount">Số lượng</label>
-                                    <input type="number" name="amount" id="amount" min="1">
-                                </div>
+        document.getElementById('name').value = allProduct.name
+        document.getElementById('type-product').value = allProduct.productType
+        document.getElementById('price').value = allProduct.price
+        document.getElementById('description').value = allProduct.description
+        document.getElementById('size-product').value = allProduct.size
+        document.getElementById('amount').value = allProduct.amount
+        document.forms.elements.elements["color"].value = allProduct.color
 
-                            </div>
-                            <div class="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="color" value="white"
-                                        id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        White
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="color" value="black"
-                                        id="flexRadioDefault2" checked>
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Black
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="d-flex">
-                                    <label class="col-md-2 fw-bold col-form-label">Ảnh sản phẩm:</label>
-                                    <div class="col-md-6">
-                                        <input type="file" class="form-control" name="image" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="text-center me-5">
-                                    <button type="submit" class="create btn btn-primary me-5">Chỉnh sửa</button>
-                                </div>
-                            </div>
-                        </form>`
-            
-        document.getElementById('name').value =  `<%= allProduct[1].name%>`
-        document.getElementById('type-product').value = `<%= allProduct[1].productType%>`
-        document.getElementById('price').value = `<%= allProduct[1].price%>`
-        document.getElementById('description').value = `<%= allProduct[1].description%>`
-        document.getElementById('size-product').value = `<%= allProduct[1].size%>`
-        document.getElementById('amount').value = `<%= allProduct[1].amount%>`
-        document.forms.elements.elements["color"].value = `<%= allProduct[1].color%>`
+
 
 
     }
@@ -393,21 +576,21 @@
 
 <script>
 
-    document.addEventListener('DOMContentLoaded', function(){
+    document.addEventListener('DOMContentLoaded', function () {
         var productId;
         var btnDeletePro = document.getElementById('btn-delete-product');
         var deleteForm = document.forms['delete-product-form'];
         // when dialog confirm clicked
         $('#delete-product-model').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) 
-        productId = button.data('id') 
-        
-        btnDeletePro.onclick = function(){
-            deleteForm.action = '/admin/product/' + productId +'?_method=DELETE'
-            deleteForm.submit();
-        }
+            var button = $(event.relatedTarget)
+            productId = button.data('id')
 
-})
+            btnDeletePro.onclick = function () {
+                deleteForm.action = '/admin/product/' + productId + '?_method=DELETE'
+                deleteForm.submit();
+            }
+
+        })
     })
 
 </script>
