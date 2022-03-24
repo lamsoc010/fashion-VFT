@@ -8,14 +8,11 @@ mongoose.connect('mongodb://localhost/fashion-VFT', { useNewUrlParser: true });
 const app = express();
 const port = 3000;
 
-
 // setup view engine
 configViewEngine(app);
 
 // init web route
 initWebRoute(app);
-
-
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

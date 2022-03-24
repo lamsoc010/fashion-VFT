@@ -12,12 +12,12 @@ let getShopLogin = (req, res) => {
 }
 let getShopLogout = (req, res) => {
     req.session.destroy(() => {
+        listCarts = null;
         return res.redirect('/');
     });
 }
 global.userIn = null;
 let getUserIn = (req, res, next) => {
-
     User.findById(req.session.userId, (err, user) => {
         if(!err) {
             global.userIn = user;
