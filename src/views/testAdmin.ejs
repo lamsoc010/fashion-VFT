@@ -10,51 +10,12 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-2 menager ">
-                    <div class="header-banner fw-bold">
-                        <div id="data_main" class="text-primary text-uppercase" onclick="turn_on(1)"><span><i
-                                    class="fa fa-folder-open-o" aria-hidden="true"></i></span> Dữ liệu gốc</div>
-                        <div id="options01">
-                            <p>Kế hoạch lựa chọn nhà thầu</p>
-                            <p>Thông tin đấu thầu</p>
-                            <p>Mở/đóng/chấm thầu</p>
-                            <p>kết quả đấu thầu</p>
-                            <p>Các bên liên quan</p>
-                        </div>
-                        <div id="bitdata" class="text-primary text-uppercase" onclick="turn_on(2)"><span><i
-                                    class="fa fa-folder-open-o" aria-hidden="true"></i></span> Thống kê bitdata</div>
-                        <div id="options02">
-                            <p>Quản lý danh mục sản phẩm</p>
-                            <a href="thongKeOto.html">
-                                <p>Báo cáo sản phẩm bán chạy</p>
-                            </a>
-                            <a href="trangThaiMua.html">
-                                <p>Trạng thái đơn hàng</p>
-                            </a>
-                            <p>Biểu đồ thống kê</p>
-                        </div>
-                        <div id="menagerment" class="text-primary text-uppercase" onclick="turn_on(3)"><span><i
-                                    class="fa fa-folder-open-o" aria-hidden="true"></i></span> Quản trị</div>
-                        <div id="options03">
-                            <a href="taikhoanKH.html">
-                                <p>Người dùng</p>
-                            </a>
-                            <div class="show_Nguoi_dung">
-                                <a href="khachHang.html">
-                                    <p> Đăng kí lái xe</p>
-                                </a>
-                                <p>Quản lý danh mục ô tô</p>
-                            </div>
-                            <p>Chức năng hệ thống</p>
-                            <p>Danh mục dùng chung</p>
-                            <p>Từ khóa</p>
-                            <a href="Trangchu.html">
-                                <p>Quay lại trang chủ</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <!-- left -->
+                <%- include('layouts/leftAdmin.ejs') %>
+                <!-- right -->
                 <div class="col-md-10 main-header ">
+
+                  
                     <!-- form -->
                     <div class="container-fluid border border-primary">
                         <!-- form thêm sản phẩm -->
@@ -186,18 +147,12 @@
                         </div>
                         <div id="editProduct"></div>
                     </div>
-
-                    <!-- tìm kiếm sản phẩm -->
-                    <!-- <div class="row">
-                        <input itemid="search" type="text" name="" id="search" onkeyup="search()"
-                            placeholder="tìm kiếm sản phẩm...">
-                    </div> -->
                     <!-- table -->
                     <div class="row  itemKhachHang my-5 mx-1">
                         <h3><span class="text-danger"><i class="fa fa-home" aria-hidden="true"></i>
                             </span> danh sách sản phẩm</h3>
                         <!-- <table class="table table-sm table-striped table-hover table-bordered" id="tablePage"> -->
-                            <table id="tablePage" class="display nowrap" style="width:100%">
+                            <table id="tablePage" class="display nowrap table table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>#STT</th>
@@ -228,9 +183,16 @@
                                         <td>
                                             <%= allProduct[i].amount %>
                                         </td>
+                                        <% if(!allProduct[i].ngayTao){%>
                                         <td>
-                                            <%= i %>
+                                            23/04/2022
                                         </td>
+                                        <% } %>
+                                        <% if(allProduct[i].ngayTao){%>
+                                            <td>
+                                                24/04/2022
+                                            </td>
+                                        <% } %>
 
                                         <td>
                                             <a id='tr_99' class='text-warning'
@@ -567,15 +529,10 @@
         document.getElementById('size-product').value = allProduct.size
         document.getElementById('amount').value = allProduct.amount
         document.forms.elements.elements["color"].value = allProduct.color
-
-
-
-
     }
 </script>
 
 <script>
-
     document.addEventListener('DOMContentLoaded', function () {
         var productId;
         var btnDeletePro = document.getElementById('btn-delete-product');
@@ -584,12 +541,10 @@
         $('#delete-product-model').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             productId = button.data('id')
-
             btnDeletePro.onclick = function () {
                 deleteForm.action = '/admin/product/' + productId + '?_method=DELETE'
                 deleteForm.submit();
             }
-
         })
     })
 

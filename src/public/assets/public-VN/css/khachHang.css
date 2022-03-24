@@ -42,7 +42,7 @@ body{
 .menager{
     border: 1px solid #F8F8FF;
     /* padding: 5px; */
-    background-color: #F8F8FF;
+    background-color: #DCDCDC;
     font-size: 13px;
     font-weight: bolder;
     cursor: pointer;
@@ -91,4 +91,7 @@ input#search{
 }
 #KhachHang_Mua{
     display: none;
+}
+h4.text-primary.my-3 {
+    text-align: center;
 }

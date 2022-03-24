@@ -59,6 +59,9 @@ let testAdmin = async (req, res) => {
 let getShopCheckout = (req, res) => {
     return res.render('shop-checkout');
 }
+let statusDonhang = (req, res) => {
+    return res.render('TrangThaiDonHang');
+}
 let editProduct =async (req, res) => {
     const searchProduct = await product.findById(req.params.id)
     return res.render('editProduct', {searchProduct});
@@ -124,6 +127,7 @@ let getShopShoppingCartNull = (req, res) => {
 module.exports = {
     editProduct,
     testAdmin,
+    statusDonhang,
     getHomepage,
     getShopItem,
     getShopAccout,

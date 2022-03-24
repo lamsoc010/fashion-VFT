@@ -1,6 +1,11 @@
 const { type } = require('express/lib/response');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+// const date = require('date-and-time')
+  
+// const now  =  new Date();
+  
+// const value = date.format(now,'YYYY/MM/DD HH:mm:ss');
 
 const ProductSchema = new Schema({
     name: {
@@ -24,6 +29,11 @@ const ProductSchema = new Schema({
         // required: false,
         min: 0,
         max: 99
+    },
+    ngayTao: {
+        type: Date,
+        // default: date.format(now,'YYYY/MM/DD')
+        default: Date.now,
     },
     status: {
         type: String,

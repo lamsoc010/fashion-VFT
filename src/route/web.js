@@ -23,7 +23,7 @@ const initWebRoute = (app) => {
     // router.post('/admin/product',  multipleUploadController.multipleUpload);
     // router.post('/admin/product/:id',  productController.updateProduct);
     // router.post('/admin/product',  productController.addProduct);
-    // router.get('/product/:id', homeController.editProduct)
+    router.get('/trangThaiDonhang', homeController.statusDonhang)
 
 
     router.get('/fake-api-product', homeController.getFakeApiProduct);

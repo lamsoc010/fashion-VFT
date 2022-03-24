@@ -15,7 +15,7 @@ const admin_product = product.find({}, (error, pro) =>{
     }
     
     
-        // nếu kết quả tìm thấy tồn tại thì chuyển snag middleware khác
+        // nếu kết quả tìm thấy tồn tại thì chuyển sang middleware khác
         // Nược lại redirect về trang chủ
     // next()
 })

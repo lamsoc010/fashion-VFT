@@ -26,7 +26,6 @@ configViewEngine(app);
 app.use(methodOverride('_method'))
 app.use('/admin/product', product)
 // init web route
-
 initWebRoute(app);
 
 
